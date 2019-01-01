@@ -1,0 +1,36 @@
+<h2><i class="fas fa-list-ul"></i> List customer</h2>
+<ul class="customers">
+  <li *ngFor="let customer of customers" [class.selected]="customer === selectedCustomer" (click)="onSelectCustomer(customer)">
+    <span class="badge">{{customer.id}}</span> {{customer.firstName + " " + customer.lastName}}
+  </li>
+</ul>
+<div *ngIf="selectedCustomer" class="details">
+  <div class="contain">
+    <div class="customer-header">
+      <img src="../../assets/images/no_avatar.jpg" >
+      <h2>{{selectedCustomer.firstName + " " + selectedCustomer.lastName}}</h2>
+    </div>
+    <div class="customer-body">
+      <!--<input type="text" placeholder="First name" [disabled]="!isEditing" value="{{selectedCustomer.firstName}}" [ngModel]="selectedCustomer.firstName">-->
+      <!--<input type="text" placeholder="Last name" [disabled]="!isEditing" value="{{selectedCustomer.lastName}}" (ngModel)="selectedCustomer.lastName">-->
+      <!--<input type="text" placeholder="Birthday" [disabled]="!isEditing" value="{{selectedCustomer.birthDay}}" (ngModel)="selectedCustomer.birthDay">-->
+      <!--<input type="text" placeholder="Gender" [disabled]="!isEditing" value="{{selectedCustomer.gender ? 'Male' : 'Female'}}" (ngModel)="selectedCustomer.gender">-->
+      <!--<input type="text" placeholder="Address" [disabled]="!isEditing" value="{{selectedCustomer.address}}" (ngModel)="selectedCustomer.address">-->
+      <!--<input type="text" placeholder="Phone Number" [disabled]="!isEditing" value="{{selectedCustomer.phoneNo}}" (ngModel)="selectedCustomer.phoneNo">-->
+      <h3><span class="fas fa-user"></span> Infomation</h3>
+      <input type="text" placeholder="First name" [disabled]="!isEditing" value="{{selectedCustomer.firstName}}" #firstName>
+      <input type="text" placeholder="Last name" [disabled]="!isEditing" value="{{selectedCustomer.lastName}}" #lastName>
+      <input type="text" placeholder="Birthday" [disabled]="!isEditing" value="{{selectedCustomer.birthDay}}" #birthDay>
+      <input type="text" placeholder="Gender" [disabled]="!isEditing" value="{{selectedCustomer.gender}}" #gender>
+      <input type="text" placeholder="Address" [disabled]="!isEditing" value="{{selectedCustomer.address}}" #address>
+      <input type="text" placeholder="Phone Number" [disabled]="!isEditing" value="{{selectedCustomer.phoneNo}}" #phoneNo>
+      <h3><span class="fas fa-shopping-cart"></span> Cart</h3>
+      <input type="text" *ngFor="let bought of selectedCustomer.bought" disabled value="{{bought.id+': '+bought.name+' -$'+bought.price}}">
+    </div>
+    <div class="footer">
+      <input type="submit" *ngIf="!isEditing" (click)="onEdit()" value="Edit">
+      <input type="submit" *ngIf="isEditing" (click)="onSave(firstName.value, lastName.value, birthDay.value, gender.value, address.value, phoneNo.value)" value="Save">
+      <input type="submit" (click)="onCancel()" value="Cancel">
+    </div>
+  </div>
+</div>
