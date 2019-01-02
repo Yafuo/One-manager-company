@@ -12,4 +12,7 @@ export class ExportBillComponent implements OnInit {
   ngOnInit() {
   }
 
+  onAddNew() {
+
+  }
 }
