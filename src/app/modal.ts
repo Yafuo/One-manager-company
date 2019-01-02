@@ -35,3 +35,10 @@ export class ImportBill {
   date: string;
   products: Product[];
 }
+
+export class ExportBill {
+  id: string;
+  date: string;
+  customerId: string;
+  products: Product[];
+}
