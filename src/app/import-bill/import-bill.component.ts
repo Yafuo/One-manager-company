@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import {IMPORTBILLS} from '../mock-import-bills';
-import {ImportBill} from '../modal';
+import {Product} from '../modal';
 
 @Component({
   selector: 'app-import-bill',
@@ -10,21 +10,18 @@ import {ImportBill} from '../modal';
 export class ImportBillComponent implements OnInit {
 
   importBills = IMPORTBILLS;
-  newBill: ImportBill = {
+  products: Product[];
+  empty: Product = {
     id: '',
-    date: '',
-    products: [
-      {
-        id: '',
-        name: '',
-        price: '',
-        quantity: null
-      }
-    ]
+    name: '',
+    quantity: null,
+    price: ''
   };
+  billId: string;
+  billDate: string;
+  productLen: number;
   isAdd = false;
-  // isDone = false;
-  // productNo: number;
+  isDone = false;
   constructor() { }
 
   ngOnInit() {
@@ -35,7 +32,6 @@ export class ImportBillComponent implements OnInit {
     if (isSure) {
       this.importBills.forEach(item => {
         if (item.id === billId) {
-          // console.log(item);
           const index = this.importBills.indexOf(item);
           this.importBills.splice(index, 1);
         }
@@ -48,24 +44,27 @@ export class ImportBillComponent implements OnInit {
   }
 
   onSave() {
-    const temp = JSON.parse(JSON.stringify(this.newBill));
-    this.importBills.push(temp);
     this.isAdd = false;
-    this.newBill.id = '';
-    this.newBill.date = '';
-    this.newBill.products = [
-      {
-        id: '',
-        name: '',
-        price: '',
-        quantity: null
-      }
-    ];
+    // console.log(JSON.parse(JSON.stringify(this.products)));
+    this.importBills.push(JSON.parse(JSON.stringify({
+      'id': this.billId,
+      'date': this.billDate,
+      'products': this.products
+    })));
+    this.isDone = false;
+    this.billId = '';
+    this.billDate = '';
+    this.productLen = null;
+    this.products = null;
   }
 
-  // createProducts() {
-  //   const length = this.productNo;
-  //   this.newBill.products = new Array(Number(length)).fill(this.newBill.products);
-  //   this.isDone = true;
-  // }
+  createProducts() {
+    this.products = new Array(Number(this.productLen));
+    let i: number;
+    for (i = 0; i < this.productLen ; i++) {
+      this.products[i] = JSON.parse(JSON.stringify(this.empty));
+    }
+    console.log(this.products);
+    this.isDone = true;
+  }
 }
