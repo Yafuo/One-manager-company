@@ -2,3 +2,26 @@
 <div class="add-bills" (click)="onAddNew()">
   <h3><span class="fas fa-plus"></span> Add</h3>
 </div>
+<div class="contain" *ngFor="let bill of exportBills">
+  <div class="customer-header">
+    <h2>{{'Bill ' + bill.id + ' of '+ getFullName(bill.customerId)}} <p (click)="onDelete(bill.id)" class="far fa-trash-alt"></p></h2>
+  </div>
+  <div class="customer-body">
+    <input type="text" placeholder="Date" disabled value="{{'Date: ' + bill.date}}">
+    <input type="text" disabled *ngFor="let product of bill.products" value="{{product.id + ': ' + product.name+ ' -$'+ product.price}}">
+  </div>
+</div>
+<div class="contain" *ngIf="isAdd">
+  <input type="text" placeholder="Bill number" [(ngModel)]="billId">
+  <input type="text" placeholder="Date" [(ngModel)]="billDate">
+  <input type="text" placeholder="Number of product type" [disabled]="isDone" [(ngModel)]="productLen" (keydown.enter)="createProducts()">
+  <div *ngFor="let product of products">
+    <input type="text" placeholder="Product Id" [(ngModel)]="product.id">
+    <input type="text" placeholder="Product Name" [(ngModel)]="product.name">
+    <input type="text" placeholder="Quantity" [(ngModel)]="product.quantity">
+    <input type="text" placeholder="Product Price" [(ngModel)]="product.price">
+  </div>
+  <div class="footer">
+    <input type="submit" (click)="onSave()" value="Create">
+  </div>
+</div>

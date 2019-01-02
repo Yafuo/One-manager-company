@@ -1,7 +1,7 @@
 <h2><i class="fas fa-list-ul"></i> List customer</h2>
 <ul class="customers">
   <li *ngFor="let customer of customers" [class.selected]="customer === selectedCustomer" (click)="onSelectCustomer(customer)">
-    <span class="badge">{{customer.id}}</span> {{customer.firstName + " " + customer.lastName}}
+    <span class="badge">{{customer.id}}</span> {{customer.firstName + " " + customer.lastName}} <span (click)="onDelete(customer.id)" class="far fa-trash-alt"></span>
   </li>
 </ul>
 <div *ngIf="selectedCustomer" class="details">

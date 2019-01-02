@@ -12,3 +12,49 @@ h2 {
   text-align: center;
   cursor: pointer;
 }
+.contain {
+  float: left;
+  width: 400px;
+  background-color: #2ecc71;
+  box-shadow: 0 4px 10px 0 rgba(0,0,0,0.5);
+  border-radius: 10px;
+  margin: 5px 10px;
+  min-height: 250px;
+  text-align: center;
+
+  .customer-header > h2 {
+    color: whitesmoke;
+    padding: 0;
+
+    p {
+      margin-left: 224px;
+      cursor: pointer;
+    }
+  }
+
+  input[type="text"] {
+    display: block;
+    width: 98%;
+    padding-left: 8px;
+    line-height: 25px;
+    border: none;
+    border-bottom: 1px dotted #2980b9;
+  }
+
+  .footer {
+    text-align: right;
+
+    input[type="submit"] {
+      background: #3498db;
+      color: whitesmoke;
+      outline: none;
+      border: none;
+      padding: 10px 20px;
+    }
+
+    input[type="submit"]:hover {
+      background-color: #bbd8dc;
+      color: #3498db;
+    }
+  }
+}
