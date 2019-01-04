@@ -4,16 +4,17 @@
 </div>
 <div class="contain" *ngFor="let bill of exportBills">
   <div class="customer-header">
-    <h2>{{'Bill ' + bill.id + ' of '+ getFullName(bill.customerId)}} <p (click)="onDelete(bill.id)" class="far fa-trash-alt"></p></h2>
+    <h2>{{'Bill ' + bill.id + ' of '+ getFullName(bill.customerId)}} <p (click)="onDelete(bill.id, bill.customerId, bill.products)" class="far fa-trash-alt"></p></h2>
   </div>
   <div class="customer-body">
     <input type="text" placeholder="Date" disabled value="{{'Date: ' + bill.date}}">
-    <input type="text" disabled *ngFor="let product of bill.products" value="{{product.id + ': ' + product.name+ ' -$'+ product.price}}">
+    <input type="text" disabled *ngFor="let product of bill.products" value="{{product.id + ': ' + product.name+ ' -$'+ product.price + ' ( '+ product.quantity+ ' item )'}}">
   </div>
 </div>
-<div class="contain" *ngIf="isAdd">
+<div class="contain" *ngIf="isBillAdd">
   <input type="text" placeholder="Bill number" [(ngModel)]="billId">
   <input type="text" placeholder="Date" [(ngModel)]="billDate">
+  <input type="text" placeholder="for who ?" [(ngModel)]="customerId" (keydown.enter)="checkCustomer()">
   <input type="text" placeholder="Number of product type" [disabled]="isDone" [(ngModel)]="productLen" (keydown.enter)="createProducts()">
   <div *ngFor="let product of products">
     <input type="text" placeholder="Product Id" [(ngModel)]="product.id">
@@ -23,5 +24,17 @@
   </div>
   <div class="footer">
     <input type="submit" (click)="onSave()" value="Create">
+  </div>
+</div>
+<div class="contain" *ngIf="isCustomerAdd">
+  <input type="text" placeholder="Customer Id" [(ngModel)]="customerId">
+  <input type="text" placeholder="First Name" [(ngModel)]="emptyCustomer.firstName">
+  <input type="text" placeholder="Last Name" [(ngModel)]="emptyCustomer.lastName">
+  <input type="text" placeholder="Gender" [(ngModel)]="emptyCustomer.gender">
+  <input type="text" placeholder="Birthday" [(ngModel)]="emptyCustomer.birthDay">
+  <input type="text" placeholder="Address" [(ngModel)]="emptyCustomer.address">
+  <input type="text" placeholder="Phone Number" [(ngModel)]="emptyCustomer.phoneNo">
+  <div class="footer">
+    <input type="submit" (click)="addNewCustomer()" value="Add">
   </div>
 </div>

@@ -30,15 +30,12 @@ export class CustomerComponent implements OnInit {
   }
 
   onDelete(customerId) {
-    const isSure = confirm('Are you sure want to delete this ?');
-    if (isSure) {
-      this.customers.forEach(item => {
-        if (item.id === customerId) {
-          const index = this.customers.indexOf(item);
-          this.customers.splice(index, 1);
-        }
-      });
-    }
+    this.customers.forEach( item => {
+      if (item.id === customerId) {
+        const index = this.customers.indexOf(item);
+        this.customers.splice(index, 1);
+      }
+    });
   }
 
   onSave(firstName, lastName, birthDay, gender, address, phoneNo) {
