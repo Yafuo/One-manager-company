@@ -19,7 +19,7 @@
       <input type="text" placeholder="Address" [disabled]="!isEditing" value="{{selectedCustomer.address}}" #address>
       <input type="text" placeholder="Phone Number" [disabled]="!isEditing" value="{{selectedCustomer.phoneNo}}" #phoneNo>
       <h3><span class="fas fa-shopping-cart"></span> Cart</h3>
-      <input type="text" *ngFor="let bought of selectedCustomer.bought" disabled value="{{bought.id+': '+bought.name+' -$'+bought.price}}">
+      <input type="text" *ngFor="let bought of selectedCustomer.bought" disabled value="{{bought.id+': '+bought.name+' -$'+bought.price +'( '+ bought.quantity+ ' item)'}}">
     </div>
     <div class="footer">
       <input type="submit" *ngIf="!isEditing" (click)="onEdit()" value="Edit">

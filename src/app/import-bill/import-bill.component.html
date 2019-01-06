@@ -4,11 +4,11 @@
 </div>
 <div class="contain" *ngFor="let bill of importBills">
   <div class="customer-header">
-    <h2>{{'Bill No ' + bill.id}}<p (click)="onDelete(bill.id)" class="far fa-trash-alt"></p></h2>
+    <h2>{{'Bill No ' + bill.id}}<p (click)="onDelete(bill)" class="far fa-trash-alt"></p></h2>
   </div>
   <div class="customer-body">
     <input type="text" placeholder="Date" disabled value="{{'Date: ' + bill.date}}">
-    <input type="text" disabled *ngFor="let product of bill.products" value="{{product.id + ': ' + product.name+ ' -$'+ product.price}}">
+    <input type="text" disabled *ngFor="let product of bill.products" value="{{product.id + ': ' + product.name+ ' -$'+ product.price + ' (' + product.quantity + ' item)'}}">
   </div>
 </div>
 <div class="contain" *ngIf="isAdd">
@@ -16,7 +16,7 @@
   <input type="text" placeholder="Date" [(ngModel)]="billDate">
   <input type="text" placeholder="Number of product type" [disabled]="isDone" [(ngModel)]="productLen" (keydown.enter)="createProducts()">
   <div *ngFor="let product of products">
-    <input type="text" placeholder="Product Id" [(ngModel)]="product.id">
+    <input type="text" placeholder="Product Id" [(ngModel)]="product.id" (keydown.enter)="checkProductExist(product.id)">
     <input type="text" placeholder="Product Name" [(ngModel)]="product.name">
     <input type="text" placeholder="Quantity" [(ngModel)]="product.quantity">
     <input type="text" placeholder="Product Price" [(ngModel)]="product.price">

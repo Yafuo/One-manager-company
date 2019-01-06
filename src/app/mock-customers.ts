@@ -43,7 +43,7 @@ export const CUSTOMERS: Customer[] = [
         id: '107',
         name: 'Mainboard Asus H110M Gaming',
         price: '40',
-        quantity: 10
+        quantity: 1
       }
     ]
   },

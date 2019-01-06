@@ -17,7 +17,7 @@
   <input type="text" placeholder="for who ?" [(ngModel)]="customerId" (keydown.enter)="checkCustomer()">
   <input type="text" placeholder="Number of product type" [disabled]="isDone" [(ngModel)]="productLen" (keydown.enter)="createProducts()">
   <div *ngFor="let product of products">
-    <input type="text" placeholder="Product Id" [(ngModel)]="product.id">
+    <input type="text" placeholder="Product Id" [(ngModel)]="product.id" (keydown.enter)="checkProductExist(product.id)">
     <input type="text" placeholder="Product Name" [(ngModel)]="product.name">
     <input type="text" placeholder="Quantity" [(ngModel)]="product.quantity">
     <input type="text" placeholder="Product Price" [(ngModel)]="product.price">

@@ -15,6 +15,7 @@ export class CustomerComponent implements OnInit {
   constructor() { }
 
   ngOnInit() {
+    console.log(this.customers);
   }
 
   onSelectCustomer(customer) {

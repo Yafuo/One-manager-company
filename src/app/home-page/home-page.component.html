@@ -5,3 +5,8 @@
     <a routerLink="/export-bill">Export Bills</a>
   </nav>
 </div>
+<div class="general-info">
+  <ul>
+    <li *ngFor="let product of storage">{{product.name+ '- $'+ product.price +': '+ product.quantity+ ' (item)'}}</li>
+  </ul>
+</div>

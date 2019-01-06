@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import {CUSTOMERS} from '../mock-customers';
 import {EXPORTBILLS} from '../mock-export-bills';
 import {Customer, Product} from '../modal';
+import {PRODUCTS} from '../mock-products';
 
 @Component({
   selector: 'app-export-bill',
@@ -10,6 +11,7 @@ import {Customer, Product} from '../modal';
 })
 export class ExportBillComponent implements OnInit {
 
+  storage = PRODUCTS;
   customers = CUSTOMERS;
   exportBills = EXPORTBILLS;
   isBillAdd = false;
@@ -68,6 +70,13 @@ export class ExportBillComponent implements OnInit {
           item.bought.splice(this.index, billProducts.length);
         }
       });
+      billProducts.forEach( product => {
+        this.storage.forEach( item => {
+          if (product.id === item.id) {
+            item.quantity +=  Number( product.quantity);
+          }
+        });
+      });
     }
   }
 
@@ -107,6 +116,13 @@ export class ExportBillComponent implements OnInit {
         });
       }
     });
+    this.products.forEach( product => {
+      this.storage.forEach( item => {
+        if (product.id === item.id) {
+          item.quantity -=  Number( product.quantity);
+        }
+      });
+    });
     this.isDone = false;
     this.billId = '';
     this.billDate = '';
@@ -132,13 +148,41 @@ export class ExportBillComponent implements OnInit {
   }
 
   checkCustomer() {
+    let flag = false;
     this.customers.forEach( item => {
       if (item.id === this.customerId) {
+        flag = true;
         return;
       }
     });
-    alert('This customer does not exist in database yet, please fill information of the customer');
-    this.isBillAdd = false;
-    this.isCustomerAdd = true;
+    if (!flag) {
+      alert('This customer does not exist in database yet, please fill information of the customer');
+      this.isBillAdd = false;
+      this.isCustomerAdd = true;
+    }
+  }
+
+  checkProductExist(productId) {
+    let flag = false;
+    this.storage.forEach( item => {
+      if (item.id === productId) {
+        flag = true;
+        alert('You bout to buy ' + item.name + ' with- $' + item.price + 'per item');
+        this.products.forEach( product => {
+          if (product.id === productId) {
+            product.name = item.name;
+            product.price = item.price;
+          }
+        });
+      }
+    });
+    if (!flag) {
+      alert('Sorry, we don\'t have this product yet');
+      this.products.forEach( product => {
+        if (product.id === productId) {
+          product.id = null;
+        }
+      });
+    }
   }
 }
